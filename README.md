@@ -271,10 +271,8 @@ You can redeploy this project by adding new lines of code to source files.
 ## 👥 Authors <a name="authors"></a>
 
 ### 👤 Habtamu Alemayehu
-<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 - GitHub: [Benawi](https://github.com/Benawi)
 - Linkdin: [Habtamu](https://www.linkedin.com/in/habtamu-alemayehu-b90367101/)
-<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="HORIZONTAL" data-vanity="habtamu-alemayehu-b90367101" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://et.linkedin.com/in/habtamu-alemayehu-b90367101?trk=profile-badge">Habtamu Alemayehu</a></div>
               
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
