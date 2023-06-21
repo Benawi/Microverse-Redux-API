@@ -1,6 +1,18 @@
-import React from "react";
-const UserNames=({user})=>{return(
-<div>{user.name.first} {user.name.last}</div>)
+/*eslint-disable*/
+
+import React from 'react'
+import './ArticleRecord.css';
+const UserNames = ({ user }) => {
+  return (
+    <section className="section">
+    <div className="container-main">
+    <div className="content">
+    <div className="aside">
+      <div className="aside-left" style={{ flex: 5 }}>
+        <div className="title">{user.name.first} {user.name.last}</div>
+</div>
+</div></div></div></section>
+  )
 }
 
-export default UserNames;
+export default UserNames

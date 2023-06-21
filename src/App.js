@@ -1,10 +1,14 @@
-import DisplayUser from './components/DisplayUser'
+import { BrowserRouter } from 'react-router-dom';
+import ViewUsers from './components/DisplayUser';
+import NavBar from './components/Navbar';
 
 function App() {
-  return (<>
-  <div>Hello user List</div>
-  <DisplayUser />
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <ViewUsers />
+    </BrowserRouter>
+  );
+}
 
-  </>)
-};
 export default App;

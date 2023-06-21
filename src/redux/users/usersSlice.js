@@ -1,39 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const url='https://randomuser.me/api/?results=20';
-const initialState ={
-    users: [],
-    isLoading: false,
-    error:''
+const initialState = {
+  users: [],
+  isLoading: false,
+  error: '',
 };
 
-export const fetchUsers =createAsyncThunk( 'user/fetchUsers', async()=>{
-    try{
-        return await fetch(url)
-        .then((response)=>response.json())
-    }catch(e){
-        return e;
-    }
+export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
+  try {
+    return fetch('https://randomuser.me/api/?results=10')
+      .then((response) => response.json());
+  } catch (error) {
+    return error;
+  }
 });
 
-const userSlice=createSlice({
-    name: 'user',
-    initialState,
-    extraReducers: (builder)=>{
-        builder.addCase(fetchUsers.pending,(state)=>{
-            state.isLoading = true;
-        })  
-builder.addCase(fetchUsers.fulfilled,(state, action)=>{
-    state.isLoading=false;
-    state.users =action.payload.results;
-    state.error='';
-})
-builder.addCase(fetchUsers.rejected,(state,action)=>{
-    state.isLoading=false;
-    state.error=action.error.message;
+const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(fetchUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.users = action.payload.results;
+      state.error = '';
+    });
+    builder.addCase(fetchUsers.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+  },
 });
-        
-    }
-})
-export default userSlice.reducer;
+
+export default usersSlice.reducer;
