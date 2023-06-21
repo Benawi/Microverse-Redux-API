@@ -36,3 +36,4 @@ builder.addCase(fetchUsers.rejected,(state,action)=>{
         
     }
 })
+export default userSlice.reducer;
