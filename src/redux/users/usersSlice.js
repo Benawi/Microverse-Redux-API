@@ -5,7 +5,7 @@ const url='https://randomuser.me/api/?results=20';
 const initialState ={
     users: [],
     isLoading: false,
-    eror:''
+    error:''
 };
 
 export const fetchUsers =createAsyncThunk( 'user/fetchUsers', async()=>{
@@ -16,3 +16,23 @@ export const fetchUsers =createAsyncThunk( 'user/fetchUsers', async()=>{
         return e;
     }
 });
+
+const userSlice=createSlice({
+    name: 'user',
+    initialState,
+    extraReducers: (builder)=>{
+        builder.addCase(fetchUsers.pending,(state)=>{
+            state.isLoading = true;
+        })  
+builder.addCase(fetchUsers.fulfilled,(state, action)=>{
+    state.isLoading=false;
+    state.users =action.payload.results;
+    state.error='';
+})
+builder.addCase(fetchUsers.rejected,(state,action)=>{
+    state.isLoading=false;
+    state.error=action.error.message;
+});
+        
+    }
+})
