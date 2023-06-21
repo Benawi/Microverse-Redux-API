@@ -7,3 +7,4 @@ const store =configureStore({
         users:usersSlice,
     }
 });
+export default store;
