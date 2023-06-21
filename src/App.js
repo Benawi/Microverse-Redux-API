@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ViewUsers from './components/DisplayUser';
 import NavBar from './components/Navbar';
 
@@ -6,7 +6,9 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <ViewUsers />
+      <Routes>
+        <Route path="/" element={<ViewUsers />} />
+      </Routes>
     </BrowserRouter>
   );
 }

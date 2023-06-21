@@ -9,7 +9,7 @@ const UserNames = ({ user }) => {
     <div className="content">
     <div className="aside">
       <div className="aside-left" style={{ flex: 5 }}>
-        <div className="title">{user.name.first} {user.name.last}</div>
+        <div className="title">{user.name.title} {user.name.first} {user.name.last}</div>
 </div>
 </div></div></div></section>
   )
