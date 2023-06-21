@@ -27,9 +27,9 @@
 
 - [📝 License](#license)
 
-# 📖 Book Store React Project <a name="about-project"></a>
+# 📖 Connect React & Redux app to API React Project <a name="about-project"></a>
 
-Book Store React Project - Microverse! - An online Bookstore app built with React, Redux, CSS, and HTML. Users can browse books by category, add them to a cart, and proceed to checkout. The app features a search function, allowing users to search for books by title or author. project is a repository consisting of the following files:
+Connect React & Redux app to API React Project - Microverse! - Connect an existing API via Redux and use the data to display something in a UI. project is a repository consisting of the following files:
 - Html files
 - CSS files
 - JS files
@@ -50,43 +50,56 @@ Book Store React Project - Microverse! - An online Bookstore app built with Reac
 
 ## 🔑 Key Features <a name="key-features"></a>
 
-### React Project: [Requirements](https://github.com/microverseinc/curriculum-react-redux/blob/main/bookstore/sneak_peek_v3_0.md)
+### React Project: [Requirements](https://github.com/microverseinc/curriculum-react-redux/blob/main/bookstore/exercises/connect_redux_api.md)
 
 ### Features Added:
-- [x] Book Store: 
-   - [x] Setup a new React application using Create React App
-   - [x] Create a directory for your reusable components: /components.
-   - [x] Install React [Router V6](https://reactrouter.com/en/main/start/tutorial#setup)
-   - [x] [Setup your router](https://reactrouter.com/en/main/start/tutorial#adding-a-router) inside of <App>
-   - [x] Add 2 routes in your application, each should render a page component:
-        - [x] /
-        - [x] /categories
-   - [x] Create components inside of the /components directory:
-        - [x] Contains individual book state, as well as a button to delete the book
-        - [x] Contains a list to renders individual books
-        - [x] Contains a form to create new books
-        - [x] Contains a navigation to link to the 2 routes you created
-    - [x] Add Redux Toolkit (npm install react-redux @reduxjs/toolkit).
-   - [x] Create a directory that will contain all your Redux logic (/src/redux)
-   - [x] Configure a Redux store (/src/redux/store.js)
-   - [x] Define a slice of state for books that:
-        - [x] Includes an array of books (initial state: empty array)
-       - [x] Includes a reducer that adds a book
-      - [x] Includes a reducer that removes a book
-  - [x] Define a slice of state for categories that:
-      - [x] Includes an array of categories (initial state: empty array)
-      - [x] Includes a reducer that checks the status and always returns "Under construction" (the initial state should check to that string)
- -[x] Structure your application files using a "feature folder" approach and use the [ducks pattern](https://github.com/erikras/ducks-modular-redux) for your Redux files.
- - [x] Wrap `<App>` with the `<Provider>` component from react-redux
-  - [x] Pass your configured store into the `<Provider>`
-  - [x] Create an initialState variable for your booksSlice, which will include 
-  - [x] Display your books, received from the slice, in a reusable component
-  - [x] Dispatch actions using useDispatch
-  - [x] Add a `<Button>` component, which includes:
-    - [x] An event handler that adds a book to the books array (with attributes id, title and author)
-  - [x] Add a `<Button>` component, which includes:
-    - [x] An event handler that removes a book from the books array (by id)
-  - [x] In the browser tested ; it render without problems, [this](https://benawi.github.io/Microverse-React-Bookstore/)
+- ### Instructions
+
+You will be working with the following external API: [Random User API](https://randomuser.me/api/?results=5).
+
+1. Create a new React application using Create React App
+2. Install `@reduxjs/toolkit react-redux`
+3. Create a new Redux store and connect it to your React application
+   - Use `configureStore` and pass it an object with a `reducer`, which should take `users` reducer
+   - Export your store as default
+   - Import and wrap `<Provider>` in your top-level component and inject your `store`
+4. Create a new slice of state in `src/store/users/usersSlice.js`
+   - Use `createSlice` and define:
+     - `name` as a string
+     - `initialState`, which includes `users` as an array, `isLoading` as a boolean and `error` as undefined
+     - `extraReducers` as an empty object
+   - Export your reducer from your slice
+   - Export the slice itself as default
+   - Import the `usersSlice` into your store and assign it to your `reducer` object
+5. Create a new component that will contain your fetched users:
+   - Import `useSelector` and destructure your `users`, `isLoading` and `error` from your users state
+   - Add a loading state; JSX content that shows when `isLoading` is true
+   - Add an error state; JSX content that shows when `error` has received new content
+   - Add a default state that maps over your `users` inside of an unordered list:
+     - Add a `key` to the container element.
+     - Render the first and last name of the user
+
+**At this stage, you should have successfully implemented Redux Toolkit! If not, please go back to the previous steps**
+
+6. Inside of `src/users/usersSlice.js`, create an action creator that fetches your users:
+   - Import `createAsyncThunk` and instantiate it in a new variable
+   - Pass your action creator 2 arguments: an action type and an asynchronous function (use the [documentation](https://redux-toolkit.js.org/api/createAsyncThunk))
+   - Write your fetching logic inside of a `try/catch` block:
+     - In the `try` block, return your fetched data
+     - In the `catch` block, pass your error to the `rejectWithValue`
+7. Inside of your `userSlice` variable, modify the `extraReducers`:
+   - Replace the empty object with a function that takes 1 argument, `builder`
+   - Add 3 cases with `addCase`, which takes 2 arguments: an action type and a reducer function
+     - In the pending state, mutate the `isLoading` state to true
+     - In the fulfilled state, mutate the `isLoading` state to false and assign the payload to the `users` state
+     - In the rejected state, mutate the `isLoading` state to false and assign an error message to the `error` state
+8. Back in your new component, add the following changes:
+   - Import `useDispatch` and instantiate it inside of a variable within the component
+   - Import `useEffect` and pass it 2 arguments: an empty function and an empty dependency array
+   - Import your action creator and dispatch it inside of your `useEffect`. Be sure to add the action creator to the dependency array
+9. Test to see if everything works. You should now have a working application!
+
+  - [x] In the browser tested ; it render without problems, [this](https://benawi.github.io/Microverse-Redux-API/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -265,7 +278,6 @@ You can redeploy this project by adding new lines of code to source files.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
--  Use the API for posting and fetching the books🚀
 -  Add some animations style for the project💯
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
