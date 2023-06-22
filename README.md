@@ -1,6 +1,5 @@
 <a name="readme-top"></a>
-
-![image](https://github.com/Benawi/Microverse-Redux-API/assets/21217148/08e22be9-182b-4543-a69e-364dde2af245)
+### <div align="center"><a href="#"><img src="https://github.com/Benawi/Benawi/assets/21217148/de823737-5f7f-4de8-b62e-3fe88c238eab"/></a></div> 
 
 
 
